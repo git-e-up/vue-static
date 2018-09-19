@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div class="main-content">
-
+<div>
+  <MyName/>
+</div>
       <ul class="main-nav">
         <li class="main-nav__item" ref="mainnavitem" v-for="(item, index) in items" :key="index" v-html="item.message" :data-postIndex="index+2" v-on:click="bounce(item); thisPost(item);" v-bind:class="{'main-nav__item--bouncing': itemActive[index]}">
         </li>
@@ -42,12 +44,17 @@
 </template>
 
 <script>
+import MyName from './components/MyName'
+
 export default {
   name: 'App',
+  components: {
+    MyName
+  },
   data: function () {
     return {
-      items: [{message: 'yomessage'}, {message: 'yomessage2'}, {message: 'stuff'}, {message: 'heyy'}],
-      content: ['what', 'cont'],
+      items: [{message: 'yo message'}, {message: 'yomessage2'}, {message: 'stuff'}, {message: 'heyy'}],
+      content: [[{contentMain: 'stuff'}], [{contentMain: 'sother tuff'}], [{contentMain: 'hi tuff'}], [{contentMain: 'sup'}]],
       itemActive: [],
       repeatablesAutocomplete: ['so many', 'things'],
       isActive: false,

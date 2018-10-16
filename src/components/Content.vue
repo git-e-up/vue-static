@@ -10,10 +10,10 @@
       <div class="col-xs-12 text-center info" :class="{'info--sliding-right': slidingRight, 'info--sliding-left': slidingLeft, 'info--sliding-up': slidingUp}">
         <transition name="slide-fade">
           <span v-if="content[this.selectedIndex]">
-            <h1 class="init-header" v-html="items[this.selectedIndex].message"></h1>
+            <h2 class="init-header" v-html="items[this.selectedIndex].message"></h2>
           </span>
           <span v-else>
-            <h1 class="init-header" v-if="show" v-html="introMessage"></h1>
+            <h2 class="init-header" v-if="show" v-html="introMessage"></h2>
           </span>
         </transition>
         <span class="info__left-arrow" v-on:click="prevPost"></span>
@@ -45,46 +45,37 @@ export default {
   name: 'Content',
   data: function () {
     return {
-      items: [{message: 'yo message'}, {message: 'yomessage2'}, {message: 'stuff'}, {message: 'heyy'}],
+      items: [{message: 'Here\'s Something'}, {message: 'Another Thing'}, {message: 'The 3rd Thing'}, {message: 'And Lastly'}],
       content: [
         [
-          {contentMain: 'stuff'},
+          {contentMain: 'You can click these images'},
           {repstuff:
             [
-
                 {
                   featured_image_url: "https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg",
                   post_content: "post content here"
                 }
               ,
-
                 {
                   featured_image_url: "https://lh4.googleusercontent.com/-VI64ujjW-Wk/AAAAAAAAAAI/AAAAAAAAB9c/mamUdtRhvhM/photo.jpg?sz=48",
                   post_content: "2nd post content here"
                 }
-
             ]
           }
         ],
         [
-          {contentMain: 'sother tuff'},
+          {contentMain: 'More things'},
           {repstuff:
-            {
-              post:
+            [
               {
                 featured_image_url: 'https://lh4.googleusercontent.com/-VI64ujjW-Wk/AAAAAAAAAAI/AAAAAAAAB9c/mamUdtRhvhM/photo.jpg?sz=48',
-                post_content: "more post content here"
-              },
-              post:
-              {
-                featured_image_url: 'https://lh4.googleusercontent.com/-VI64ujjW-Wk/AAAAAAAAAAI/AAAAAAAAB9c/mamUdtRhvhM/photo.jpg?sz=48',
-                post_content: "more post content here"
+                post_content: "This wasn't worth clicking"
               }
-            }
+            ]
           }
         ],
-        [{contentMain: 'hi tuff'}],
-        [{contentMain: 'sup'}
+        [{contentMain: 'No images here!'}],
+        [{contentMain: 'Thanks for stopping by. View this project on <a href="https://github.com/git-e-up/vue-static" target="_blank">github</a>.'}
         ]
       ],
       itemActive: [],

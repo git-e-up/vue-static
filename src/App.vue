@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <div class="main-content">
-      <div>
+      <section class="svgs">
         <MyName/>
-      </div>
+        <MyPic/>
+      </section>
       <Content/>
     </div>
   </div>
@@ -11,12 +12,14 @@
 
 <script>
 import MyName from './components/MyName'
+import MyPic from './components/MyPic'
 import Content from './components/Content'
 
 export default {
   name: 'App',
   components: {
     MyName,
+    MyPic,
     Content
   },
   data: function () {
@@ -34,7 +37,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  // margin-top: 60px;
   $off-white: rgb(243, 242, 237);
   $blue-steel: #607d8b;
   $screen-sm-min: 768px;
@@ -51,9 +54,9 @@ export default {
     display: none;
   }
   .main-content {
-   margin: 20px auto;
+   // margin: 20px auto;
     text-align: center;
-    width: 90%;
+    // width: 90%;
   }
   .ssl-warning {
     display: none;
@@ -149,6 +152,7 @@ export default {
   }
   .init-header {
   	line-height: 45px;
+    margin-top: 0;
   }
   .info__right-arrow {
     position: absolute;

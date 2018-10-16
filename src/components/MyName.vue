@@ -8,10 +8,5 @@
 <script>
 export default {
   name: 'MyName',
-  // data () {
-  //   return {
-  //     msg: 'Welcome to Your Vue.js Apphfh'
-  //   }
-  // }
 }
 </script>

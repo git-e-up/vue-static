@@ -46,17 +46,13 @@ export default {
   * {
     font-family: 'futura-pt', 'Libre Franklin', sans-serif;
     font-weight: 700;
-  }
-  body {
-    background: #f3f2ed;
+    line-height: 1.5rem;
   }
   .hide {
     display: none;
   }
   .main-content {
-   // margin: 20px auto;
     text-align: center;
-    // width: 90%;
   }
   .ssl-warning {
     display: none;
@@ -105,7 +101,7 @@ export default {
     box-shadow: 3px 3px 5px #888888;
     background-color: $blue-steel;
     color: $off-white;
-    margin-bottom: 100px;
+    // margin-bottom: 100px;
     position: relative;
   }
   .info__content{
@@ -113,19 +109,19 @@ export default {
   }
   .info__list {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     margin: 0;
     padding-left: 0;
   }
   .info__list__item {
-    width: 45%;
+    flex-basis: 45%;
     display: block;
     @media(min-width: $screen-sm-min) {
-      width: 30%;
+      flex-basis: 30%;
     }
     @media(min-width: $screen-md-min) {
-      width: 22.5%;
+      flex-basis: 22.5%;
     }
     @media(min-width: $screen-lg-min) {
       width: 18%;
@@ -152,7 +148,7 @@ export default {
   }
   .init-header {
   	line-height: 45px;
-    margin-top: 0;
+    margin: 0;
   }
   .info__right-arrow {
     position: absolute;
@@ -283,7 +279,17 @@ export default {
         height 0.25s ease-out 0.75s;
     }
   }
-
+  .info__popup--img{
+    display: block;
+    margin: auto;
+    max-width: 50%;
+    @media(min-width: $screen-sm-min) {
+      max-width: 37.5%;
+    }
+    @media(min-width: $screen-md-min) {
+      max-width: 25%;
+    }
+  }
 
   .modal-background--open{
     top: 0;

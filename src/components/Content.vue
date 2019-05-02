@@ -9,21 +9,21 @@
       </div>
       <div class="col-xs-12 text-center info" :class="{'info--sliding-right': slidingRight, 'info--sliding-left': slidingLeft, 'info--sliding-up': slidingUp}">
         <transition name="slide-fade">
-          <span v-if="content[this.selectedIndex]">
-            <h2 class="init-header" v-html="items[this.selectedIndex].message"></h2>
-          </span>
-          <span v-else>
-            <h2 class="init-header" v-if="show" v-html="introMessage"></h2>
-          </span>
+
+            <h2 v-if="content[this.selectedIndex]"" class="init-header" v-html="items[this.selectedIndex].message"></h2>
+
+
+            <h2 v-else class="init-header" v-if="show" v-html="introMessage"></h2>
+
         </transition>
         <span class="info__left-arrow" v-on:click="prevPost"></span>
         <div class="info__content" v-if="content[this.selectedIndex]">
 
-          <div v-html="content[this.selectedIndex][0].contentMain"></div>
+          <p v-html="content[this.selectedIndex][0].contentMain"></p>
           <ul v-if="content[this.selectedIndex][1]" class="info__list">
             <li v-for="(post, postIndex) in content[this.selectedIndex][1].repstuff" :key="postIndex" class="info__list__item" v-on:click="openModal(postIndex)">
-              <div class='info__popup__preview'>
-                <div class="thumbnail-container" :style="{backgroundImage:`url(' ${post.featured_image_url} ')` }  " style="background-size: cover; background-position: center center; background-repeat:no-repeat"></div>
+              <div v-if="post.featured_image_url" class='info__popup__preview'>
+                <div class="thumbnail-container" :style="{backgroundImage:`url(' ${post.featured_image_url} ')` }  " style="background-size: cover; background-position: center top; background-repeat:no-repeat"></div>
                 <h4 v-html="post.post_title"></h4>
               </div>
               <section class='info__popup' :class="{'info--show-popup':modalOpen[postIndex]}" :ref="'popup-'+postIndex"><span class='x-close'></span><div v-html="post.post_content"></div></section>
@@ -45,31 +45,31 @@ export default {
   name: 'Content',
   data: function () {
     return {
-      items: [{message: 'Here\'s Something'}, {message: 'Another Thing'}, {message: 'The 3rd Thing'}, {message: 'And Lastly'}],
+      items: [{message: 'Howdy'}, {message: 'Also'}, {message: 'The 3rd Thing'}, {message: 'And Lastly'}],
       content: [
         [
-          {contentMain: 'You can click these images'},
+          {contentMain: 'I\'m Matt. I\'m a web developer living in Austin, TX. I often work on WordPress sites like these. (You can click on the images btw.)'},
           {repstuff:
             [
                 {
-                  featured_image_url: "https://www.catster.com/wp-content/uploads/2017/08/A-fluffy-cat-looking-funny-surprised-or-concerned.jpg",
-                  post_content: "post content here"
+                  featured_image_url: "//i.imgur.com/FtugXAk.png",
+                  post_content: " <img class='info__popup--img' src='//i.imgur.com/FtugXAk.png' alt='behindthechair'/><p>This is <a href='https://behindthechair.com' target='_blank'>where I work</a>. They provide online education and plan events for people in the hair and beauty industry.</p>"
                 }
               ,
                 {
-                  featured_image_url: "https://lh4.googleusercontent.com/-VI64ujjW-Wk/AAAAAAAAAAI/AAAAAAAAB9c/mamUdtRhvhM/photo.jpg?sz=48",
-                  post_content: "2nd post content here"
+                  featured_image_url: "//i.imgur.com/3DFKEf5.png",
+                  post_content: "<img class='info__popup--img' src='//i.imgur.com/3DFKEf5.png' alt='behindthechair'/><p>They have a <a href='https://oneshot.behindthechair.com' target='_blank'>separate site</a> for an annual awards ceremony</p>"
                 }
             ]
           }
         ],
         [
-          {contentMain: 'More things'},
+          {contentMain: 'Sometimes I work on sites that are on other platforms, like Shopify. I also dabble in other frameworks, like Laravel.'},
           {repstuff:
             [
               {
-                featured_image_url: 'https://lh4.googleusercontent.com/-VI64ujjW-Wk/AAAAAAAAAAI/AAAAAAAAB9c/mamUdtRhvhM/photo.jpg?sz=48',
-                post_content: "This wasn't worth clicking"
+                featured_image_url: '',
+                post_content: ""
               }
             ]
           }

@@ -12,6 +12,7 @@
     "deploy": "node ./node_modules/vue-gh-pages/index.js"
   },
   "dependencies": {
+    "mem": "^4.0.0",
     "vue": "^2.5.2",
     "vue-gh-pages": "^1.19.0",
     "vue-router": "^3.0.1"

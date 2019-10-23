@@ -1,7 +1,7 @@
 <template>
   <div>
       <ul class="main-nav">
-        <li class="main-nav__item" ref="mainnavitem" v-for="(item, index) in items" :key="index" v-html="item.message" :data-postIndex="index+2" v-on:click="bounce(item); thisPost(item);" v-bind:class="{'main-nav__item--bouncing': itemActive[index]}">
+        <li class="main-nav__item" ref="mainnavitem" v-for="(item, index) in content" :key="index" v-html="item[0].contentTitle" :data-postIndex="index" v-on:click="bounce(item); thisPost(item);" v-bind:class="{'main-nav__item--bouncing': itemActive[index]}">
         </li>
       </ul>
       <div class="ssl-warning" v-bind:class="{ active: isActive }">
@@ -10,7 +10,7 @@
       <div class="col-xs-12 text-center info" :class="{'info--sliding-right': slidingRight, 'info--sliding-left': slidingLeft, 'info--sliding-up': slidingUp}">
         <transition name="slide-fade">
 
-            <h2 v-if="content[this.selectedIndex]" class="init-header" v-html="items[this.selectedIndex].message"></h2>
+            <h2 v-if="content[this.selectedIndex]" class="init-header" v-html="content[this.selectedIndex][0].contentTitle"></h2>
 
 
             <h2 v-else class="init-header" v-html="introMessage"></h2>
@@ -18,12 +18,11 @@
         </transition>
         <span class="info__left-arrow" v-on:click="prevPost"></span>
         <div class="info__content" v-if="content[this.selectedIndex]">
-
-          <p v-html="content[this.selectedIndex][0].contentMain"></p>
-          <ul v-if="content[this.selectedIndex][1]" class="info__list">
-            <li v-for="(post, postIndex) in content[this.selectedIndex][1].repstuff" :key="postIndex" class="info__list__item" v-on:click="openModal(postIndex)">
-              <div v-if="post.featured_image_url" class='info__popup__preview'>
-                <div class="thumbnail-container" :style="{backgroundImage:`url(' ${post.featured_image_url} ')` }  " style="background-size: cover; background-position: center top; background-repeat:no-repeat"></div>
+          <p v-html="content[this.selectedIndex][1].contentMain"></p>
+          <ul v-if="content[this.selectedIndex][2]" class="info__list">
+            <li v-for="(post, postIndex) in content[this.selectedIndex][2].repeaterContent" :key="postIndex" class="info__list__item" v-on:click="openModal(postIndex)">
+              <div v-if="post.featuredImageURL" class='info__popup__preview'>
+                <div class="thumbnail-container" :style="{backgroundImage:`url(' ${post.featuredImageURL} ')` }  " style="background-size: cover; background-position: center top; background-repeat:no-repeat"></div>
                 <h4 v-html="post.post_title"></h4>
               </div>
               <section class='info__popup' :class="{'info--show-popup':modalOpen[postIndex]}" :ref="'popup-'+postIndex"><span class='x-close'></span><div v-html="post.post_content"></div></section>
@@ -45,42 +44,49 @@ export default {
   name: 'Content',
   data: function () {
     return {
-      items: [{message: 'Howdy'}, {message: 'Also'}, {message: 'The 3rd Thing'}, {message: 'And Lastly'}],
       content: [
         [
+          {contentTitle: 'Howdy'},
           {contentMain: 'I\'m Matt. I\'m a web developer living in Austin, TX. I often work on WordPress sites like these, building custom themes and plugins. (You can click on the images btw.)'},
-          {repstuff:
+          {repeaterContent:
             [
                 {
-                  featured_image_url: "//i.imgur.com/FtugXAk.png",
+                  featuredImageURL: "//i.imgur.com/FtugXAk.png",
                   post_content: " <img class='info__popup--img' src='//i.imgur.com/FtugXAk.png' alt='behindthechair'/><p>This is <a href='https://behindthechair.com' target='_blank'>where I work</a>. They provide online education and plan events for people in the hair and beauty industry.</p>"
                 }
               ,
                 {
-                  featured_image_url: "//i.imgur.com/3DFKEf5.png",
+                  featuredImageURL: "//i.imgur.com/3DFKEf5.png",
                   post_content: "<img class='info__popup--img' src='//i.imgur.com/3DFKEf5.png' alt='behindthechair'/><p>They have a <a href='https://oneshot.behindthechair.com' target='_blank'>separate site</a> for an annual awards ceremony</p>"
                 }
             ]
           }
         ],
         [
+          {contentTitle: 'Also'},
           {contentMain: 'Sometimes I work on sites that are on other platforms, like Shopify. I also do a little work in Laravel, a separate PHP framework.'},
-          {repstuff:
+          {repeaterContent:
             [
               {
-                featured_image_url: 'https://i.imgur.com/IEvNWA9.png',
+                featuredImageURL: 'https://i.imgur.com/IEvNWA9.png',
                 post_content: "<img class='info__popup--img' src='https://i.imgur.com/IEvNWA9.png' alt='Victory Barber'/><p>This is a site for <a href='https://victorybarber.com/' target='_blank'>barbering products</a></p>"
               },
               {
-                featured_image_url: 'https://i.imgur.com/VR7wLfS.png',
+                featuredImageURL: 'https://i.imgur.com/VR7wLfS.png',
                 post_content: "<img class='info__popup--img' src='https://i.imgur.com/VR7wLfS.png' alt='Arc Scissors'/><p>This is a site for <a href='https://arcscissors.com/' target='_blank'>hairdressing scissors</a></p>"
               }
             ]
           }
         ],
-        [{contentMain: 'No images here!'}],
-        [{contentMain: 'Thanks for stopping by. View this project on <a href="https://github.com/git-e-up/vue-static" target="_blank">github</a>.'}
+        [
+          {contentTitle: 'The 3rd Thing'},
+          {contentMain: 'No images here!'}
+        ],
+        [
+          {contentTitle: 'And Lastly'},
+          {contentMain: 'Thanks for stopping by. View this project on <a href="https://github.com/git-e-up/vue-static" target="_blank">github</a>.'}
         ]
+
       ],
       itemActive: [],
       repeatablesAutocomplete: [],
@@ -99,13 +105,13 @@ export default {
     dontBounce: function () {
       let i = 0
       // reset all itemActive properties back to false
-      while (i < this.items.length) {
+      while (i < this.content.length) {
         this.itemActive[i] = false
         i++
       }
     },
     bounce: function (item) {
-      let itemInd = this.items.indexOf(item)
+      let itemInd = this.content.indexOf(item)
       this.dontBounce()
       this.itemActive[itemInd] = true
     },
@@ -113,8 +119,8 @@ export default {
       // this.introMessage = item.message;
       // this.selectedIndex = this.items.indexOf(item);
       this.slidingUp = true
-      let i = item.message
-      let s = this.items.indexOf(item)
+      let i = item.contentTitle
+      let s = this.content.indexOf(item)
 
       let x = this
       setTimeout(function () {
@@ -130,7 +136,7 @@ export default {
       let thisNext = this
       thisNext.slidingRight = true
       setTimeout(function () {
-        let count = thisNext.items.length
+        let count = thisNext.content.length
         thisNext.selectedIndex++
         if (thisNext.selectedIndex > (count - 1)) {
           thisNext.selectedIndex = 0
@@ -146,7 +152,7 @@ export default {
       let thisPrev = this
       thisPrev.slidingLeft = true
       setTimeout(function () {
-        let count = thisPrev.items.length
+        let count = thisPrev.content.length
         thisPrev.selectedIndex--
         if (thisPrev.selectedIndex < 0) {
           thisPrev.selectedIndex = count - 1

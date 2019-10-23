@@ -1,7 +1,7 @@
 <template>
   <div>
       <ul class="main-nav">
-        <li class="main-nav__item" ref="mainnavitem" v-for="(item, index) in content" :key="index" v-html="item[0].contentTitle" :data-postIndex="index" v-on:click="bounce(item); thisPost(item);" v-bind:class="{'main-nav__item--bouncing': itemActive[index]}">
+        <li class="main-nav__item" ref="mainnavitem" v-for="(item, index) in content" :key="index" v-html="item.contentTitle" :data-postIndex="index" v-on:click="bounce(item); thisPost(item);" v-bind:class="{'main-nav__item--bouncing': itemActive[index]}">
         </li>
       </ul>
       <div class="ssl-warning" v-bind:class="{ active: isActive }">
@@ -10,7 +10,7 @@
       <div class="col-xs-12 text-center info" :class="{'info--sliding-right': slidingRight, 'info--sliding-left': slidingLeft, 'info--sliding-up': slidingUp}">
         <transition name="slide-fade">
 
-            <h2 v-if="content[this.selectedIndex]" class="init-header" v-html="content[this.selectedIndex][0].contentTitle"></h2>
+            <h2 v-if="content[this.selectedIndex]" class="init-header" v-html="content[this.selectedIndex].contentTitle"></h2>
 
 
             <h2 v-else class="init-header" v-html="introMessage"></h2>
@@ -18,9 +18,9 @@
         </transition>
         <span class="info__left-arrow" v-on:click="prevPost"></span>
         <div class="info__content" v-if="content[this.selectedIndex]">
-          <p v-html="content[this.selectedIndex][1].contentMain"></p>
-          <ul v-if="content[this.selectedIndex][2]" class="info__list">
-            <li v-for="(post, postIndex) in content[this.selectedIndex][2].repeaterContent" :key="postIndex" class="info__list__item" v-on:click="openModal(postIndex)">
+          <p v-html="content[this.selectedIndex].contentMain"></p>
+          <ul v-if="content[this.selectedIndex]" class="info__list">
+            <li v-for="(post, postIndex) in content[this.selectedIndex].repeaterContent" :key="postIndex" class="info__list__item" v-on:click="openModal(postIndex)">
               <div v-if="post.featuredImageURL" class='info__popup__preview'>
                 <div class="thumbnail-container" :style="{backgroundImage:`url(' ${post.featuredImageURL} ')` }  " style="background-size: cover; background-position: center top; background-repeat:no-repeat"></div>
                 <h4 v-html="post.post_title"></h4>
@@ -45,10 +45,10 @@ export default {
   data: function () {
     return {
       content: [
-        [
-          {contentTitle: 'Howdy'},
-          {contentMain: 'I\'m Matt. I\'m a web developer living in Austin, TX. I often work on WordPress sites like these, building custom themes and plugins. (You can click on the images btw.)'},
-          {repeaterContent:
+        {
+          contentTitle: 'Howdy',
+          contentMain: 'I\'m Matt. I\'m a web developer living in Austin, TX. I often work on WordPress sites like these, building custom themes and plugins. (You can click on the images btw.)',
+          repeaterContent:
             [
                 {
                   featuredImageURL: "//i.imgur.com/FtugXAk.png",
@@ -60,12 +60,12 @@ export default {
                   post_content: "<img class='info__popup--img' src='//i.imgur.com/3DFKEf5.png' alt='behindthechair'/><p>They have a <a href='https://oneshot.behindthechair.com' target='_blank'>separate site</a> for an annual awards ceremony</p>"
                 }
             ]
-          }
-        ],
-        [
-          {contentTitle: 'Also'},
-          {contentMain: 'Sometimes I work on sites that are on other platforms, like Shopify. I also do a little work in Laravel, a separate PHP framework.'},
-          {repeaterContent:
+
+        },
+        {
+          contentTitle: 'Also',
+          contentMain: 'Sometimes I work on sites that are on other platforms, like Shopify. I also do a little work in Laravel, a separate PHP framework.',
+          repeaterContent:
             [
               {
                 featuredImageURL: 'https://i.imgur.com/IEvNWA9.png',
@@ -76,16 +76,16 @@ export default {
                 post_content: "<img class='info__popup--img' src='https://i.imgur.com/VR7wLfS.png' alt='Arc Scissors'/><p>This is a site for <a href='https://arcscissors.com/' target='_blank'>hairdressing scissors</a></p>"
               }
             ]
-          }
-        ],
-        [
-          {contentTitle: 'The 3rd Thing'},
-          {contentMain: 'No images here!'}
-        ],
-        [
-          {contentTitle: 'And Lastly'},
-          {contentMain: 'Thanks for stopping by. View this project on <a href="https://github.com/git-e-up/vue-static" target="_blank">github</a>.'}
-        ]
+
+        },
+        {
+          contentTitle: 'The 3rd Thing',
+          contentMain: 'No images here!'
+        },
+        {
+          contentTitle: 'And Lastly',
+          contentMain: 'Thanks for stopping by. View this project on <a href="https://github.com/git-e-up/vue-static" target="_blank">github</a>.'
+        }
 
       ],
       itemActive: [],
@@ -124,7 +124,6 @@ export default {
 
       let x = this
       setTimeout(function () {
-        console.log('hi')
         x.introMessage = i
         x.selectedIndex = s
       }, 1500)

@@ -10,10 +10,10 @@
       <div class="col-xs-12 text-center info" :class="{'info--sliding-right': slidingRight, 'info--sliding-left': slidingLeft, 'info--sliding-up': slidingUp}">
         <transition name="slide-fade">
 
-            <h2 v-if="content[this.selectedIndex]"" class="init-header" v-html="items[this.selectedIndex].message"></h2>
+            <h2 v-if="content[this.selectedIndex]" class="init-header" v-html="items[this.selectedIndex].message"></h2>
 
 
-            <h2 v-else class="init-header" v-if="show" v-html="introMessage"></h2>
+            <h2 v-else class="init-header" v-html="introMessage"></h2>
 
         </transition>
         <span class="info__left-arrow" v-on:click="prevPost"></span>
@@ -48,7 +48,7 @@ export default {
       items: [{message: 'Howdy'}, {message: 'Also'}, {message: 'The 3rd Thing'}, {message: 'And Lastly'}],
       content: [
         [
-          {contentMain: 'I\'m Matt. I\'m a web developer living in Austin, TX. I often work on WordPress sites like these. (You can click on the images btw.)'},
+          {contentMain: 'I\'m Matt. I\'m a web developer living in Austin, TX. I often work on WordPress sites like these, building custom themes and plugins. (You can click on the images btw.)'},
           {repstuff:
             [
                 {
@@ -64,12 +64,16 @@ export default {
           }
         ],
         [
-          {contentMain: 'Sometimes I work on sites that are on other platforms, like Shopify. I also dabble in other frameworks, like Laravel.'},
+          {contentMain: 'Sometimes I work on sites that are on other platforms, like Shopify. I also do a little work in Laravel, a separate PHP framework.'},
           {repstuff:
             [
               {
-                featured_image_url: '',
-                post_content: ""
+                featured_image_url: 'https://i.imgur.com/IEvNWA9.png',
+                post_content: "<img class='info__popup--img' src='https://i.imgur.com/IEvNWA9.png' alt='Victory Barber'/><p>This is a site for <a href='https://victorybarber.com/' target='_blank'>barbering products</a></p>"
+              },
+              {
+                featured_image_url: 'https://i.imgur.com/VR7wLfS.png',
+                post_content: "<img class='info__popup--img' src='https://i.imgur.com/VR7wLfS.png' alt='Arc Scissors'/><p>This is a site for <a href='https://arcscissors.com/' target='_blank'>hairdressing scissors</a></p>"
               }
             ]
           }

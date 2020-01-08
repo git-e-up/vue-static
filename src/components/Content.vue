@@ -1,49 +1,54 @@
 <template>
-  <div>
-      <ul class="main-nav">
-        <li class="main-nav__item" ref="mainnavitem" v-for="(item, index) in content" :key="index" v-html="item.contentTitle" :data-postIndex="index" v-on:click="bounce(item); thisPost(item);" v-bind:class="{'main-nav__item--bouncing': itemActive[index]}">
-        </li>
-      </ul>
-      <div class="ssl-warning" v-bind:class="{ active: isActive }">
-        <p>Sorry, I didn't want to pay godaddy $75 for SSL so you'll need to allow your browser from unauthenticated sources</p>
+  <section class="tabbed-content">
+    <ul class="main-nav">
+      <li class="main-nav__item" ref="mainnavitem" v-for="(item, index) in content" :key="index" v-html="item.contentTitle" :data-postIndex="index" v-on:click="bounce(item); thisPost(item);" v-bind:class="{'main-nav__item--bouncing': itemActive[index]}">
+      </li>
+    </ul>
+
+    <div class="ssl-warning" v-bind:class="{ active: isActive }">
+      <p>Sorry, I didn't want to pay godaddy $75 for SSL so you'll need to allow your browser from unauthenticated sources</p>
+    </div>
+
+    <div class="col-xs-12 text-center info" :class="{'info--sliding-right': slidingRight, 'info--sliding-left': slidingLeft, 'info--sliding-up': slidingUp}">
+      <transition name="slide-fade">
+
+          <h2 v-if="content[this.selectedIndex]" class="init-header" v-html="content[this.selectedIndex].contentTitle"></h2>
+
+          <h2 v-else class="init-header" v-html="introMessage"></h2>
+
+      </transition>
+      <span class="info__left-arrow" v-on:click="nextPrevPost(goToPrev)"></span>
+      <div class="info__content" v-if="content[this.selectedIndex]">
+        <p v-html="content[this.selectedIndex].contentMain"></p>
+        <ul v-if="content[this.selectedIndex].repeaterContent" class="info__list">
+          <li v-for="(post, postIndex) in content[this.selectedIndex].repeaterContent" :key="postIndex" class="info__list__item" v-on:click="openModal(postIndex)">
+            <div v-if="post.featuredImageURL" class='info__popup__preview'>
+              <div class="thumbnail-container" :style="{backgroundImage:`url(' ${post.featuredImageURL} ')` }  " style="background-size: cover; background-position: center top; background-repeat:no-repeat"></div>
+              <h4 v-html="post.post_title"></h4>
+            </div>
+            <section class='info__popup' :class="{'info--show-popup':modalOpen[postIndex]}" :ref="'popup-'+postIndex"><div v-html="post.post_content"></div></section>
+          </li>
+        </ul>
+
       </div>
-      <div class="col-xs-12 text-center info" :class="{'info--sliding-right': slidingRight, 'info--sliding-left': slidingLeft, 'info--sliding-up': slidingUp}">
-        <transition name="slide-fade">
-
-            <h2 v-if="content[this.selectedIndex]" class="init-header" v-html="content[this.selectedIndex].contentTitle"></h2>
-
-
-            <h2 v-else class="init-header" v-html="introMessage"></h2>
-
-        </transition>
-        <span class="info__left-arrow" v-on:click="prevPost"></span>
-        <div class="info__content" v-if="content[this.selectedIndex]">
-          <p v-html="content[this.selectedIndex].contentMain"></p>
-          <ul v-if="content[this.selectedIndex]" class="info__list">
-            <li v-for="(post, postIndex) in content[this.selectedIndex].repeaterContent" :key="postIndex" class="info__list__item" v-on:click="openModal(postIndex)">
-              <div v-if="post.featuredImageURL" class='info__popup__preview'>
-                <div class="thumbnail-container" :style="{backgroundImage:`url(' ${post.featuredImageURL} ')` }  " style="background-size: cover; background-position: center top; background-repeat:no-repeat"></div>
-                <h4 v-html="post.post_title"></h4>
-              </div>
-              <section class='info__popup' :class="{'info--show-popup':modalOpen[postIndex]}" :ref="'popup-'+postIndex"><span class='x-close'></span><div v-html="post.post_content"></div></section>
-            </li>
-          </ul>
-
-        </div>
-          <span class="info__right-arrow" v-on:click="nextPost"></span>
-      </div>
+        <span class="info__right-arrow" v-on:click="nextPrevPost(goToNext)"></span>
+    </div>
 
       <div class="modal-background" :class="{'modal-background--open': modalBackground }" v-on:click="closeModal"></div>
-    </div>
+  </section>
 </template>
 
 
 
 <script>
+const puppy = require('../assets/IMG_3861.jpg');
 export default {
   name: 'Content',
   data: function () {
     return {
+      // staticImages: {
+      //     puppy: require('../assets/IMG_3861.jpg')
+      // },
       content: [
         {
           contentTitle: 'Howdy',
@@ -64,7 +69,7 @@ export default {
         },
         {
           contentTitle: 'Also',
-          contentMain: 'Sometimes I work on sites that are on other platforms, like Shopify. I also do a little work in Laravel, a separate PHP framework.',
+          contentMain: 'Sometimes I work on sites that are on other platforms, like Shopify.',
           repeaterContent:
             [
               {
@@ -80,7 +85,14 @@ export default {
         },
         {
           contentTitle: 'The 3rd Thing',
-          contentMain: 'No images here!'
+          contentMain: "In my spare time, I dabble in Laravel, a separate PHP framework. I also tend to a dog with questionable manners.",
+          repeaterContent:
+            [
+                {
+                  featuredImageURL: require('../assets/IMG_3861.jpg'),
+                  post_content: "<img class='info__popup--img' src="+require('../assets/IMG_3861.jpg')+"/><p>This is the longest he's ever sat still</p>"
+                }
+            ]
         },
         {
           contentTitle: 'And Lastly',
@@ -98,7 +110,9 @@ export default {
       modalBackground: false,
       slidingRight: false,
       slidingLeft: false,
-      slidingUp: false
+      slidingUp: false,
+      goToNext: 'Right',
+      goToPrev: 'Left'
     }
   },
   methods: {
@@ -116,8 +130,6 @@ export default {
       this.itemActive[itemInd] = true
     },
     thisPost: function (item) {
-      // this.introMessage = item.message;
-      // this.selectedIndex = this.items.indexOf(item);
       this.slidingUp = true
       let i = item.contentTitle
       let s = this.content.indexOf(item)
@@ -131,47 +143,62 @@ export default {
         x.slidingUp = false
       }, 2500)
     },
-    nextPost: function () {
-      let thisNext = this
-      thisNext.slidingRight = true
+
+    nextPrevPost: function (rightOrLeft) {
+      let nextPrev = this
+      let count = nextPrev.content.length
+      let beginningIndex = nextPrev.selectedIndex
+
+      if (rightOrLeft === 'Right'){
+        nextPrev.slidingRight = true
+      }
+      else {
+        nextPrev.slidingLeft = true
+      }
       setTimeout(function () {
-        let count = thisNext.content.length
-        thisNext.selectedIndex++
-        if (thisNext.selectedIndex > (count - 1)) {
-          thisNext.selectedIndex = 0
+        if (rightOrLeft === 'Right'){
+          nextPrev.selectedIndex++
+          if (nextPrev.selectedIndex > (count - 1)) {
+            //if already on last li in main-nav, go to the first li
+            nextPrev.selectedIndex = 0
+          }
         }
-        thisNext.dontBounce()
-        thisNext.itemActive[thisNext.selectedIndex] = true
+        else {
+          nextPrev.selectedIndex--
+          if (nextPrev.selectedIndex < 0) {
+            //if already on first li in main-nav, go to the last li
+            nextPrev.selectedIndex = count - 1
+          }
+        }
+        /*
+        remove .main-nav__item--bouncing from old li
+        -- could also utilize nextPrev.dontBounce()
+        */
+        nextPrev.itemActive[beginningIndex] = false
+        //add to new
+        nextPrev.itemActive[nextPrev.selectedIndex] = true
       }, 1500)
       setTimeout(function () {
-        thisNext.slidingRight = false
+        nextPrev.slidingLeft = false
+        nextPrev.slidingRight = false
       }, 3000)
     },
-    prevPost: function () {
-      let thisPrev = this
-      thisPrev.slidingLeft = true
-      setTimeout(function () {
-        let count = thisPrev.content.length
-        thisPrev.selectedIndex--
-        if (thisPrev.selectedIndex < 0) {
-          thisPrev.selectedIndex = count - 1
-        }
-        thisPrev.dontBounce()
-        thisPrev.itemActive[thisPrev.selectedIndex] = true
-      }, 1500)
-      setTimeout(function () {
-        thisPrev.slidingLeft = false
-      }, 3000)
-    },
+
+
     openModal: function (postIndex) {
-      this.modalBackground = true
-      this.modalOpen[postIndex] = true
-      console.log(this.modalOpen)
+      if (this.modalBackground){
+        this.modalOpen = []
+        this.modalBackground = false
+      } else{
+        this.modalBackground = true
+        this.modalOpen[postIndex] = true
+      }
     },
     closeModal: function () {
       this.modalOpen = []
       this.modalBackground = false
       console.log(this.modalOpen)
+      console.log('fdsafd')
     }
   },
   mounted: function(){

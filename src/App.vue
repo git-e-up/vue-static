@@ -41,6 +41,7 @@ export default {
   $screen-sm-min: 768px;
   $screen-md-min: 992px;
   $screen-lg-min: 1200px;
+  min-height: calc(100vh - 15px);
   * {
     font-family: 'futura-pt', 'Libre Franklin', sans-serif;
     font-weight: 700;

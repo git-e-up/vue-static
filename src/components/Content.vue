@@ -89,8 +89,8 @@ export default {
           repeaterContent:
             [
                 {
-                  featuredImageURL: require('../assets/IMG_3861.jpg'),
-                  post_content: "<img class='info__popup--img' src="+require('../assets/IMG_3861.jpg')+"/><p>This is the longest he's ever sat still</p>"
+                  featuredImageURL: require('@/assets/IMG_3861.jpg'),
+                  post_content: "<img class='info__popup--img' src="+require('@/assets/IMG_3861.jpg')+"/><p>This is the longest he's ever sat still</p>"
                 }
             ]
         },

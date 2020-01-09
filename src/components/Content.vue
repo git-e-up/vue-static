@@ -46,9 +46,6 @@ export default {
   name: 'Content',
   data: function () {
     return {
-      // staticImages: {
-      //     puppy: require('../assets/IMG_3861.jpg')
-      // },
       content: [
         {
           contentTitle: 'Howdy',
@@ -197,8 +194,6 @@ export default {
     closeModal: function () {
       this.modalOpen = []
       this.modalBackground = false
-      console.log(this.modalOpen)
-      console.log('fdsafd')
     }
   },
   mounted: function(){

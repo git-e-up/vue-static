@@ -2,7 +2,7 @@
   "name": "static-matt-site",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "Matt Lissner <matt@doejo.com>",
+  "author": "Matt Lissner <mlissne@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

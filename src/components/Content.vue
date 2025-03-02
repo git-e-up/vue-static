@@ -49,12 +49,12 @@ export default {
       content: [
         {
           contentTitle: 'Howdy',
-          contentMain: 'I\'m Matt. I\'m a web developer living in Austin, TX. I often work on WordPress sites like these, building custom themes and plugins. (You can click on the images btw.)',
+          contentMain: 'I\'m Matt. I\'m a web developer living in Texas. I used to work on WordPress sites like these, building custom themes and plugins. (You can click on the images btw.)',
           repeaterContent:
             [
                 {
                   featuredImageURL: "//i.imgur.com/FtugXAk.png",
-                  post_content: " <img class='info__popup--img' src='//i.imgur.com/FtugXAk.png' alt='behindthechair'/><p>This is <a href='https://behindthechair.com' target='_blank'>where I work</a>. They provide online education and plan events for people in the hair and beauty industry.</p>"
+                  post_content: " <img class='info__popup--img' src='//i.imgur.com/FtugXAk.png' alt='behindthechair'/><p>This is <a href='https://behindthechair.com' target='_blank'>where I used to work</a>. They provide online education and plan events for people in the hair and beauty industry.</p>"
                 }
               ,
                 {
@@ -66,23 +66,11 @@ export default {
         },
         {
           contentTitle: 'Also',
-          contentMain: 'Sometimes I work on sites that are on other platforms, like Shopify.',
-          repeaterContent:
-            [
-              {
-                featuredImageURL: 'https://i.imgur.com/IEvNWA9.png',
-                post_content: "<img class='info__popup--img' src='https://i.imgur.com/IEvNWA9.png' alt='Victory Barber'/><p>This is a site for <a href='https://victorybarber.com/' target='_blank'>barbering products</a></p>"
-              },
-              {
-                featuredImageURL: 'https://i.imgur.com/VR7wLfS.png',
-                post_content: "<img class='info__popup--img' src='https://i.imgur.com/VR7wLfS.png' alt='Arc Scissors'/><p>This is a site for <a href='https://arcscissors.com/' target='_blank'>hairdressing scissors</a></p>"
-              }
-            ]
-
+          contentMain: 'Sometimes I worked on sites that are on other platforms, like Shopify.'
         },
         {
           contentTitle: 'The 3rd Thing',
-          contentMain: "In my spare time, I dabble in Laravel, a separate PHP framework. I also tend to a dog with questionable manners.",
+          contentMain: "In my spare time I tend to a dog with questionable manners.",
           repeaterContent:
             [
                 {

@@ -66,7 +66,7 @@ export default {
         },
         {
           contentTitle: 'Also',
-          contentMain: 'Sometimes I worked on sites that are on other platforms, like Shopify.'
+          contentMain: 'Sometimes, I worked on sites that are on other platforms, like Shopify.'
         },
         {
           contentTitle: 'The 3rd Thing',

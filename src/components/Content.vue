@@ -80,7 +80,7 @@ export default {
         },
         {
           contentTitle: 'And Lastly',
-          contentMain: 'Thanks for stopping by. View this project on <a href="https://github.com/git-e-up/vue-static" target="_blank">github</a>.'
+          contentMain: 'Thanks for stopping by! View the source for this site on <a href="https://github.com/git-e-up/vue-static" target="_blank">GitHub</a>.'
         }
 
       ],

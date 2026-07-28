@@ -47,7 +47,7 @@ export default {
     return {
       content: [
         {
-          contentTitle: 'Howdy',
+          contentTitle: 'Howdy!',
           contentMain: 'I\'m Matt. I\'m a web developer living in Texas. I used to work on WordPress sites like these, building custom themes and plugins. (You can click on the images btw.)',
           repeaterContent:
             [

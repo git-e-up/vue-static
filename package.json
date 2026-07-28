@@ -11,11 +11,10 @@
     "lint": "eslint src",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "node ./node_modules/vue-gh-pages/index.js"
+    "deploy": "vite build && node scripts/deploy.js"
   },
   "dependencies": {
     "vue": "^2.7.16",
-    "vue-gh-pages": "^1.19.1",
     "vue-router": "^3.6.5"
   },
   "devDependencies": {
@@ -30,9 +29,7 @@
     "vue-eslint-parser": "^10.4.1"
   },
   "overrides": {
-    "vue-gh-pages": {
-      "gh-pages": "^6.3.0"
-    }
+    "brace-expansion": "^5.0.8"
   },
   "engines": {
     "node": ">= 20.19.0"

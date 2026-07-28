@@ -41,7 +41,6 @@
 
 
 <script>
-const puppy = require('../assets/IMG_3861.jpg');
 export default {
   name: 'Content',
   data: function () {

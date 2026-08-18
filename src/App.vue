@@ -53,27 +53,6 @@ export default {
   .main-content {
     text-align: center;
   }
-  .ssl-warning {
-    display: none;
-  }
-  .ssl-warning.active {
-    display: block;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0,0,0,0.5);
-    p {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      background-color: #fff;
-      width: 280px;
-      transform: translate(-50%, -50%);
-      padding: 20px;
-    }
-  }
   a {
     color: #000;
     padding: 3px;

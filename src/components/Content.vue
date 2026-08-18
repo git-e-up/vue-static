@@ -5,10 +5,6 @@
       </li>
     </ul>
 
-    <div class="ssl-warning" v-bind:class="{ active: isActive }">
-      <p>Sorry, I didn't want to pay godaddy $75 for SSL so you'll need to allow your browser from unauthenticated sources</p>
-    </div>
-
     <div class="col-xs-12 text-center info" :class="{'info--sliding-right': slidingRight, 'info--sliding-left': slidingLeft, 'info--sliding-up': slidingUp}">
       <transition name="slide-fade">
 
@@ -48,7 +44,11 @@ export default {
       content: [
         {
           contentTitle: 'Howdy!',
-          contentMain: 'I\'m Matt. I\'m a web developer living in Texas. I used to work on WordPress sites like these, building custom themes and plugins. (You can click on the images btw.)',
+          contentMain: 'I\'m Matt. I\'m a software engineer living in Texas. Most recently I was a Senior Software Engineer at <a href="https://www.zeiss.com/meditec/en/products/veracity.html" target="_blank">Carl Zeiss Meditec</a>, helping bring a regulated cataract surgery planning app to market with React, TypeScript, and Node.js. I\'m currently looking for what\'s next.'
+        },
+        {
+          contentTitle: 'Also',
+          contentMain: 'Earlier in my career I worked on WordPress and Shopify sites like these, building custom themes and plugins. (You can click on the images btw.)',
           repeaterContent:
             [
                 {
@@ -61,22 +61,10 @@ export default {
                   post_content: "<img class='info__popup--img' src='//i.imgur.com/3DFKEf5.png' alt='behindthechair'/><p>They have a <a href='https://oneshot.behindthechair.com' target='_blank'>separate site</a> for an annual awards ceremony</p>"
                 }
             ]
-
-        },
-        {
-          contentTitle: 'Also',
-          contentMain: 'Sometimes, I worked on sites that are on other platforms, like Shopify.'
         },
         {
           contentTitle: 'The 3rd Thing',
-          contentMain: "In my spare time I tend to a dog with questionable manners.",
-          repeaterContent:
-            [
-                {
-                  featuredImageURL: './static/IMG_3861.jpg',
-                  post_content: "<img class='info__popup--img' src='./static/IMG_3861.jpg'/><p>This is the longest he's ever sat still</p>"
-                }
-            ]
+          contentMain: "In my spare time I referee two kids who are best friends and worst enemies, depending on the minute. Current hobbies include full makeup application, elaborate dress-up, and cooking creations that are, technically, food. Rainbow sprinkles on your pizza, anyone?"
         },
         {
           contentTitle: 'And Lastly',
@@ -86,7 +74,6 @@ export default {
       ],
       itemActive: [],
       repeatablesAutocomplete: [],
-      isActive: false,
       show: true,
       selectedIndex: '',
       introMessage: 'Hi There',

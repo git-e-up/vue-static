@@ -44,7 +44,7 @@ export default {
       content: [
         {
           contentTitle: 'Howdy!',
-          contentMain: 'I\'m Matt. I\'m a software engineer living in Texas. Most recently I was a Senior Software Engineer at <a href="https://www.zeiss.com/meditec/en/products/veracity.html" target="_blank">Carl Zeiss Meditec</a>, helping bring a regulated cataract surgery planning app to market with React, TypeScript, and Node.js. I\'m currently looking for what\'s next.'
+          contentMain: 'I\'m Matt. I\'m a software engineer living in Texas. Most recently I was a Senior Software Engineer at <a href="https://www.zeiss.com/meditec/en/products/veracity.html" target="_blank">Carl Zeiss Meditec</a>, helping bring a regulated cataract surgery planning app to market with React, TypeScript, and Node.js. I\'m currently looking for what\'s next, and in the meantime I\'ve been volunteering, both at my kids\' elementary school and with local elections.'
         },
         {
           contentTitle: 'Also',
